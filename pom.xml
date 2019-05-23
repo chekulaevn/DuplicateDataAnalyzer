@@ -50,5 +50,4 @@
             <systemPath>${basedir}/lib/postgresql-42.2.5.jar</systemPath>
         </dependency>
     </dependencies>
-
 </project>

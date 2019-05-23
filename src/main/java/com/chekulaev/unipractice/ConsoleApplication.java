@@ -1,17 +1,17 @@
 package com.chekulaev.unipractice;
 
-import com.chekulaev.unipractice.utils.AnalysisReport;
+import com.chekulaev.unipractice.utils.FinderReport;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class ConsoleApplication {
     private static final Scanner terminalScanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
-        DataAnalyzer analyzer = ctx.getBean("dataAnalyzer", DataAnalyzer.class);
+        DuplicateFinder finder = ctx.getBean("duplicateFinder", DuplicateFinder.class);
         ctx.close();
 
         char flag = 'y';
@@ -23,13 +23,14 @@ public class ConsoleApplication {
                     " character): ");
             String[] inputStrings = terminalScanner.nextLine().split(" ");
             try {
-                AnalysisReport report = analyzer.analyze(tableName, inputStrings);
+                FinderReport report = finder.find(tableName, inputStrings, 4);
                 System.out.println("//---//---//---//---//---//");
                 System.out.println("   Time spent: " + report.getTimeSpent() + " seconds");
-                System.out.println("   Records processed: " + report.getProcessedRecordCount());
+                System.out.println("   Records processed: " + report.getProcessedRecordsNumber());
                 System.out.println("   Duplicates found: " + report.getDuplicateCount());
                 System.out.println("//---//---//---//---//---//");
             } catch (Exception e) {
+                //e.printStackTrace();
                 System.out.println(e.getMessage());
             }
             System.out.print("Repeat? (y/n): ");

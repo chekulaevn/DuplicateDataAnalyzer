@@ -2,18 +2,24 @@ package com.chekulaev.unipractice.utils;
 
 public class FinderReport {
     private int processedRecordsNumber;
-    private int foundRecordsNumber;
+    private int duplicateCount;
+    private double timeSpent;
 
-    public FinderReport(int processedRecordNumber, int foundRequestedRecordsNumber) {
-        this.processedRecordsNumber = processedRecordNumber;
-        this.foundRecordsNumber = foundRequestedRecordsNumber;
+    public FinderReport(int processedRecordsNumber, int duplicateCount, double timeSpent) {
+        this.processedRecordsNumber = processedRecordsNumber;
+        this.duplicateCount = duplicateCount;
+        this.timeSpent = timeSpent;
     }
 
     public int getProcessedRecordsNumber() {
         return processedRecordsNumber;
     }
 
-    public int getFoundRecordsNumber() {
-        return foundRecordsNumber;
+    public int getDuplicateCount() {
+        return duplicateCount;
+    }
+
+    public double getTimeSpent() {
+        return timeSpent;
     }
 }
